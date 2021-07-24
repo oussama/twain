@@ -8,6 +8,7 @@ homepage = "https://github.com/oussama/twain/"
 repository = "https://github.com/oussama/twain/"
 license = "MIT"
 keywords = ["twain", "image", "scan"]
+description = "Idiomatic rust TWAIN library"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
