@@ -1,0 +1,16 @@
+[package]
+name = "twain"
+version = "0.1.0"
+authors = ["Oussama Gammoudi <md.oussama@gmail.com>"]
+edition = "2018"
+readme= "README.md"
+homepage = "https://github.com/oussama/twain/"
+repository = "https://github.com/oussama/twain/"
+license = "MIT"
+keywords = ["twain", "image", "scan"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dlopen = "0.1.8"
+dlopen_derive = "0.1.4"
+lazy_static = "1.4.0"
