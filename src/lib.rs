@@ -887,6 +887,7 @@ use dlopen::Error as DlOpenError;
 impl Client {
     pub fn new() -> Result<Client, DlOpenError> {
         let lib_path = "./lib/windows/TWAINDSM.dll";
+        // let lib_path = "C:/Windows/System32/TWAINDSM.dll";
         let cont: Container<Api> = unsafe { Container::load(lib_path) }?;
 
         let p = std::env::current_exe().unwrap();
@@ -1039,7 +1040,10 @@ impl OpenDS {
         Some(out)
     }
 
-    pub fn user_interface_enable_ds(self, config: &UserInterface) -> Result<EnabledDS, TWRC> {
+    pub fn user_interface_enable_ds(
+        self,
+        config: &UserInterface,
+    ) -> Result<Option<EnabledDS>, TWRC> {
         let res = unsafe {
             self.api.dsm_entry(
                 &self.identity,
@@ -1050,11 +1054,15 @@ impl OpenDS {
                 config as *const UserInterface as *const usize,
             )
         };
-        res.ok().map(|_| EnabledDS {
-            api: self.api,
-            identity: self.identity,
-            selected: self.selected,
-        })
+        match res {
+            TWRC::SUCCESS => Ok(Some(EnabledDS {
+                api: self.api,
+                identity: self.identity,
+                selected: self.selected,
+            })),
+            TWRC::CANCEL => Ok(None),
+            _ => Err(res),
+        }
     }
 }
 

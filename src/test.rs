@@ -33,6 +33,7 @@ fn it_works() {
 
     let enabled_ds = open_ds
         .user_interface_enable_ds(&UserInterface::new(true, true))
+        .unwrap()
         .unwrap();
 
     let ev = enabled_ds.recv().unwrap();
